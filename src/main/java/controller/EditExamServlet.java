@@ -1,34 +1,43 @@
 package controller;
 
 import dao.ExamDAO;
-import model.Examcard;
+import model.ExamInput;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
-@WebServlet("/teacher/editExamPage")
-public class EditExamPageServlet extends HttpServlet {
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String examIdStr = request.getParameter("examId");
-        if (examIdStr == null) {
-            response.sendRedirect(request.getContextPath() + "/teacher/manageExams");
-            return;
-        }
-
-        int examId = Integer.parseInt(examIdStr);
-        ExamDAO dao = new ExamDAO();
+@WebServlet("/teacher/editExam")
+public class EditExamServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Examcard exam = dao.getExamById(examId);
-            if (exam == null) {
-                response.sendRedirect(request.getContextPath() + "/teacher/manageExams");
-                return;
-            }
-            request.setAttribute("exam", exam);
-            request.getRequestDispatcher("/WEB-INF/EditExam.jsp").forward(request, response);
+            int examId = Integer.parseInt(request.getParameter("examId"));
+            String examName = request.getParameter("examName");
+            String subject = request.getParameter("subject");
+            LocalDate examDate = LocalDate.parse(request.getParameter("examDate"));
+            LocalTime startTime = LocalTime.parse(request.getParameter("startTime"));
+            LocalTime endTime = LocalTime.parse(request.getParameter("endTime"));
+            int totalMarks = Integer.parseInt(request.getParameter("totalMarks"));
 
+            ExamInput input = new ExamInput();
+            input.setExamName(examName);
+            input.setSubject(subject);
+            input.setExamDate(examDate);
+            input.setStartTime(startTime);
+            input.setEndTime(endTime);
+            input.setTotalMarks(totalMarks);
+
+            ExamDAO dao = new ExamDAO();
+            boolean updated = dao.updateExam(examId, input);
+
+            if (updated) {
+                response.sendRedirect(request.getContextPath() + "/teacher/manageExams?updateSuccess=1");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/teacher/manageExams?updateFailed=1");
+            }
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/error.jsp");

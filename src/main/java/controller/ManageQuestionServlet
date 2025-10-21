@@ -1,0 +1,37 @@
+package controller;
+
+import dao.QuestionDAO;
+import model.Question;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet("/teacher/manageQuestion")
+public class ManageQuestionServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String examIdStr = request.getParameter("examId");
+        if (examIdStr == null || examIdStr.trim().isEmpty()) {
+            response.sendRedirect(request.getContextPath() + "/teacher/manageExams");
+            return;
+        }
+
+        int examId = Integer.parseInt(examIdStr);
+
+        try {
+            QuestionDAO questionDAO = new QuestionDAO();
+            List<Question> questions = questionDAO.getQuestionsByExamId(examId);
+            request.setAttribute("questions", questions);
+            request.setAttribute("examId", examId);
+            request.getRequestDispatcher("/manage_questions.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/error.jsp");
+        }
+    }
+}

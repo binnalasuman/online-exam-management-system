@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "question": "Which of the following is not a Java keyword?",
+    "options": ["class", "int", "goto", "main"],
+    "answer": "main"
+  },
+  {
+    "id": 2,
+    "question": "Which company developed Java?",
+    "options": ["Microsoft", "Sun Microsystems", "Google", "IBM"],
+    "answer": "Sun Microsystems"
+  }
+]

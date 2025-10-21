@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Teacher Login - Online Examination System</title>
+<link rel="stylesheet" href="style.css"/>
+
+</head>
+<body class="teacher-body">
+    <div class="container">
+        <h1>Teacher Login</h1>
+        <form action="TeacherLoginServlet" method="post">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <!-- name must be "email" to match servlet -->
+                <input type="text" id="email" name="email" placeholder="Enter email" required />
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password" required />
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+        <p><a href="index.html">← Back to Home</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+/* ===== RESET & BASE ===== */
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  color: #222;
+  overflow-x: hidden;
+  text-align: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  transition: background 0.5s ease;
+}
+
+/* ===== GLASSMORPHISM CARD CONTAINER ===== */
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  max-width: 420px;
+  width: 100%;
+  padding: 48px 36px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  animation: fadeInUp 0.7s ease forwards;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ===== TYPOGRAPHY ===== */
+.container h1 {
+  font-weight: 900;
+  font-size: 2.8rem;
+  margin-bottom: 28px;
+  color: #f0f0f5;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  letter-spacing: 1.2px;
+  line-height: 1.15;
+}
+
+.container p {
+  color: #e0e0e8;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 36px;
+  letter-spacing: 0.7px;
+}
+
+/* ===== FORM GROUPS ===== */
+.form-group {
+  margin-bottom: 22px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #d1d1de;
+  font-size: 1rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 14px 18px;
+  font-size: 1rem;
+  border-radius: 14px;
+  border: none;
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: inset 4px 4px 8px rgba(255,255,255,0.8),
+              inset -4px -4px 8px rgba(0,0,0,0.1);
+  color: #222;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  outline-offset: 4px;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 0 10px #6a11cb, 0 0 15px #2575fc;
+  outline: none;
+  color: #111;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  width: 100%;
+  padding: 16px 0;
+  background: linear-gradient(145deg, #6a11cb, #2575fc);
+  border: none;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(38, 93, 235, 0.4);
+  transition: background 0.35s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  user-select: none;
+}
+
+.btn:hover,
+.btn:focus {
+  background: linear-gradient(145deg, #5b0eb6, #1e63d6);
+  box-shadow: 0 12px 28px rgba(30, 99, 214, 0.7);
+  transform: translateY(-3px);
+  outline: none;
+}
+
+/* ===== BACK LINK ===== */
+.container p.back-link {
+  margin-top: 28px;
+  color: #c7c7d9;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.container p.back-link a {
+  color: #9a8fff;
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.container p.back-link a:hover,
+.container p.back-link a:focus {
+  color: #6a11cb;
+  text-decoration: underline;
+  outline: none;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== INDEX PAGE BODY ===== */
+body.index-body {
+  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80');
+  flex-direction: column;
+  color: #f0f0f5;
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.75);
+}
+
+/* INDEX PAGE BUTTONS */
+.index-links {
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.index-links a {
+  background: linear-gradient(145deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 16px 44px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  border-radius: 24px;
+  box-shadow: 0 10px 32px rgba(38, 93, 235, 0.5);
+  text-decoration: none;
+  transition: background 0.35s ease, transform 0.3s ease;
+  user-select: none;
+}
+
+.index-links a:hover,
+.index-links a:focus {
+  background: linear-gradient(145deg, #5b0eb6, #1e63d6);
+  transform: translateY(-4px);
+  outline: none;
+}
+
+/* ===== STUDENT LOGIN BODY ===== */
+body.student-body {
+  background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1350&q=80');
+  flex-direction: column;
+  color: #f0f0f5;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+/* STUDENT LOGIN CARD */
+body.student-body .container {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== TEACHER LOGIN BODY ===== */
+body.teacher-body {
+  background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1350&q=80');
+  flex-direction: column;
+  color: #f0f0f5;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.75);
+}
+
+/* TEACHER LOGIN CARD */
+body.teacher-body .container {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 24px;
+    border-radius: 20px;
+  }
+
+  .container h1 {
+    font-size: 2rem;
+  }
+
+  .container p {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+
+  .index-links {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .index-links a {
+    padding: 14px 36px;
+    font-size: 1.1rem;
+    border-radius: 20px;
+  }
+}

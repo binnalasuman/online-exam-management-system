@@ -1,0 +1,19 @@
+package dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import util.DBUtil;
+
+public class ResultDAO {
+    public void saveResult(int studentId, int examId, int score, String status) throws Exception {
+        String sql = "INSERT INTO result (student_id, exam_id, score, status) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, studentId);
+            ps.setInt(2, examId);
+            ps.setInt(3, score);
+            ps.setString(4, status);
+            ps.executeUpdate();
+        }
+    }
+}

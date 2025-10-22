@@ -1,56 +1,68 @@
 <%@ page import="java.util.List" %>
-<%@ page import="model.Examcard" %>
 <%@ page import="model.Question" %>
-<%
-    Examcard exam = (Examcard) request.getAttribute("exam");
-    List<Question> questions = (List<Question>) request.getAttribute("questions");
-    int duration = exam.getDurationMinutes();
-%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Start Exam</title>
-    <script>
-        let duration = <%= duration %> * 60; // in seconds
-        let timerDisplay = null;
-
-        function startTimer() {
-            timerDisplay = document.getElementById('timer');
-            let time = duration;
-            let interval = setInterval(function () {
-                let min = Math.floor(time / 60);
-                let sec = time % 60;
-                timerDisplay.textContent = min + "m " + (sec < 10 ? "0" + sec : sec) + "s";
-                if (time <= 0) {
-                    clearInterval(interval);
-                    document.getElementById('examForm').submit();
-                }
-                time--;
-            }, 1000);
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f3;
+            margin: 0;
+            padding: 20px;
         }
-        window.onload = startTimer;
-    </script>
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+        }
+        form {
+            background: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: auto;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        button {
+            background: #27ae60;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #219150;
+        }
+    </style>
 </head>
 <body>
-    <h2><%= exam.getExamName() %></h2>
-    <div>Time Remaining: <span id="timer"></span></div>
 
-    <form id="examForm" action="<%= request.getContextPath() + "/student/submitExam" %>" method="post">
-        <input type="hidden" name="examId" value="<%= exam.getExamId() %>" />
-        <%
-            for (Question q : questions) {
-        %>
-        <div>
-            <b>Q<%= q.getQuestionId() %>: <%= q.getQuestionText() %></b><br/>
-            <label><input type="radio" name="q<%= q.getQuestionId() %>" value="1" /> <%= q.getOption1() %></label><br/>
-            <label><input type="radio" name="q<%= q.getQuestionId() %>" value="2" /> <%= q.getOption2() %></label><br/>
-            <label><input type="radio" name="q<%= q.getQuestionId() %>" value="3" /> <%= q.getOption3() %></label><br/>
-            <label><input type="radio" name="q<%= q.getQuestionId() %>" value="4" /> <%= q.getOption4() %></label><br/><br/>
+<h2>Online Exam</h2>
+
+<form action="submitExam" method="post">
+    <input type="hidden" name="examId" value="${examId}" />
+
+    <c:forEach var="q" items="${questions}" varStatus="loop">
+        <div class="question">
+            <p><b>Q${loop.index + 1}: ${q.questionText}</b></p>
+            <label><input type="radio" name="q${q.questionId}" value="1"> ${q.option1}</label><br>
+            <label><input type="radio" name="q${q.questionId}" value="2"> ${q.option2}</label><br>
+            <label><input type="radio" name="q${q.questionId}" value="3"> ${q.option3}</label><br>
+            <label><input type="radio" name="q${q.questionId}" value="4"> ${q.option4}</label><br>
         </div>
-        <%
-            }
-        %>
-        <button type="submit">Submit Exam</button>
-    </form>
+    </c:forEach>
+
+    <center><button type="submit">Submit Exam</button></center>
+</form>
+
 </body>
 </html>
